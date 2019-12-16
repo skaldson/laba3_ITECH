@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<head>
+    <title>laba3_js</title>
+</head>
+    <body>
+            <style>
+                    .btn {
+                        width: 80px;
+                        height: 80px;
+                        background: #00ff00;
+                        display: inline-block;
+                        text-align: center;
+                        line-height: 80px;
+                        user-select: none;
+                    }
+                 
+                    .btn:hover {
+                        background: #ff0000;
+                        color: #000000;
+                    }
+                 
+                    #calc-wrap {
+                        padding: 30px;
+                        width: 100%;
+                        text-align: center;
+                        background: #00ffff;
+                    }
+                 
+                    #calc {
+                        width: 260px;
+                        display: inline-block;
+                    }
+                 
+                    #inputVal {
+                        width: 100%;
+                        border: 0;
+                        font-size: 20px;
+                        resize: vertical;
+                    }
+                </style>
+                <script>
+                        window.addEventListener('load', function OnWindowLoaded() {
+                            var signs = [
+                                '1', '2', '3', '4',
+                                '5', '6', '7', '8',
+                                '9', '+', '-', '/',
+                                '*', '.', '=', 'c'
+                            ];
+                         
+                            var calc = document.getElementById('calc');
+                         
+                            var textArea = document.getElementById('inputVal');
+                         
+                            signs.forEach(function (sign) {
+                                var signElement = document.createElement('div');
+                                signElement.className = 'btn';
+                                signElement.innerHTML = sign;
+                                calc.appendChild(signElement);
+                            });
+                         
+                            document.querySelectorAll('#calc-wrap .btn').forEach(function (button) {
+                                button.addEventListener('click', onButtonClick);
+                            });
+                         
+                            function onButtonClick(e) {
+                                if (e.target.innerHTML === 'c') {
+                                    textArea.innerHTML = '0';
+                                } else if (e.target.innerHTML === '=') {
+                                    textArea.innerHTML = eval(textArea.innerHTML);
+                                } else if (textArea.innerHTML === '0') {
+    
+                                    textArea.innerHTML = e.target.innerHTML;
+                                } else {
+                                    textArea.innerHTML += e.target.innerHTML;
+                                }
+                            }
+                        });
+                        </script>
+        <div id="calc-wrap">
+            <div id="calc">
+                <textarea id=inputVal>0</textarea>
+             </div>
+        </div>
+    </body>
+</html>
